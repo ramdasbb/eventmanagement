@@ -1,5 +1,33 @@
-First Requirement -
-
+##Setup 
+Please follow the high-level installation steps & let me know if any issues you face. 
+Installation steps 
+   1] Install Jsk 1.8
+        https://www.oracle.com/in/java/technologies/javase/javase8-archive-downloads.html
+        Set environment variable to make it available through terminal
+    2] Install scala 2.12
+        https://www.scala-lang.org/download/2.12.2.html
+        Set environment variable to make it available through terminal
+    3] Install sbt latest
+        https://www.scala-sbt.org/download.html
+        set env variable to make it available through terminal
+    4] Install Intellij latest
+        https://www.jetbrains.com/idea/download/#section=windows
+        4.1] Add scala and play plugins
+                https://www.jetbrains.com/help/idea/discover-intellij-idea-for-scala.html#scala_plugin
+    5] Install git 
+        https://git-scm.com/downloads
+    
+##Setup project 
+    Open terminal OR git bash & hit below commands- 
+    
+    git clone https://github.com/ramdasbb/eventmanagement.git
+    cd eventmanagement
+    sbt run 
+    
+    open the browser or postman and hit below urls 
+    http://localhost:9000/api/player
+    
+=========================================== TODO ==========================================
 I have Ui ready to add player
 Please give me API to add Player data and get player List.
 
