@@ -1,6 +1,6 @@
-First Requirement -
+Event management project which does CRUD operation.
+With services test cases and controller.
 
-I have Ui ready to add player
 Please give me API to add Player data and get player List.
 
 Eventmanagement
@@ -20,11 +20,10 @@ Eventmanagement
         Name
         Country
         score
-    3] Match
-        - name - wouldcup
-        - score
-        - Venue
-
+    3] Match -
+        - name  - wouldcup
+        - Venue - SriLanka
+- Add / update / search and delete Player.
 
 
 

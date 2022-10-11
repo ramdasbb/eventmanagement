@@ -41,5 +41,12 @@ class HomeControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecting
       contentType(home) mustBe Some("text/html")
       contentAsString(home) must include ("Welcome to Play")
     }
+
+    "render the index page from the router 2" in {
+      val request = FakeRequest(GET, "/api/player/byid/1")
+      val home = route(app, request).get
+      println(" contentType(home)"+  contentType(home))
+      status(home) mustBe OK
+    }
   }
 }
