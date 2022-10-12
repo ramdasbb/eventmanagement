@@ -45,6 +45,30 @@ class PlayerController @Inject()(playerDao: PlayerDao, playerService: PlayerServ
     }
   }
 
+  /*def addPlayer: Action[AnyContent] = Action.async { implicit request =>
+    println("Called addPlauer")
+    playerDao.userForm.bindFromRequest.fold(
+      formWithErrors => Future(BadRequest(
+        "Not good data"+ formWithErrors)
+      ),
+      player => {
+        playerDao.insert(player).map { p =>
+          Ok(Json.toJson(p))
+        }
+      }
+    )
+  }*/
+    /*request.body.asJson match {
+      case Some(json) =>
+        val player = json.asOpt[Player].getOrElse(throw new NoSuchElementException("Please provide valid data"))
+        playerDao.insert(player).map { p =>
+          Ok(Json.toJson(p))
+        }
+      case None =>
+        Future.successful(BadRequest)
+    }*/
+
+
   def updatePlayer: Action[JsValue] = Action.async(parse.json) { implicit request =>
     request.body.validate[Player] match {
       case p: JsSuccess[Player] =>

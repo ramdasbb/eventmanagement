@@ -1,4 +1,4 @@
-@(event: String)
+@(event: String)(implicit requestHeader: RequestHeader, messages: Messages)
 
 @main("Welcome to Play") {
   <h1>@event</h1>
