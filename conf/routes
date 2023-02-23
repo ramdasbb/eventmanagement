@@ -25,3 +25,17 @@ PUT     /api/team                          controllers.TeamController.updateTeam
 DELETE  /api/team/:name                    controllers.TeamController.deleteTeam(name: String)
 GET     /api/team/byname/:name             controllers.TeamController.getTeamByName(name: String)
 GET     /api/team/all                      controllers.TeamController.all
+
+#Employee Ops
++nocsrf
+POST    /employee/add                      controllers.EmployeeController.addEmployee()
+GET     /employee/byId/:id                 controllers.EmployeeController.getEmployeeById(id: Long)
+GET     /employee/byName/:name             controllers.EmployeeController.getEmployeeByName(name: String)
+GET     /employee/all                      controllers.EmployeeController.getAllEmployees()
+PUT     /employee/update/ById/:id          controllers.EmployeeController.updateEmployeeById(id: Long)
+PUT     /employee/update                   controllers.EmployeeController.updateEmployee()
+DELETE  /employee/delete/ById/:id          controllers.EmployeeController.deleteEmployeeById(id: Long)
+DELETE  /employee/delete/ByName/:name      controllers.EmployeeController.deleteEmployeeByName(name: String)
+
+
+
