@@ -3,9 +3,9 @@
 ## Setup Instructions
 
 ### Prerequisites
-#####  1.scala 2.13.6
+##### 1.scala 2.13.6
 ##### 2. sbt 1.3.8
-##### 3. play framework
+##### 3. play Framework
 ##### 4. MySQL database
 
 ###  Configuration
