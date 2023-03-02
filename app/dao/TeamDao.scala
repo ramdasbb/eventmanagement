@@ -1,6 +1,6 @@
 package dao
 
-import models.{Team}
+import models.Team
 import play.api.data.Form
 
 import javax.inject.{Inject, Singleton}
