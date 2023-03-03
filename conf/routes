@@ -25,3 +25,13 @@ PUT     /api/team                          controllers.TeamController.updateTeam
 DELETE  /api/team/:name                    controllers.TeamController.deleteTeam(name: String)
 GET     /api/team/byname/:name             controllers.TeamController.getTeamByName(name: String)
 GET     /api/team/all                      controllers.TeamController.all
+
+
+#Student Ops
++nocsrf
+POST    /api/student                        controllers.StudentController.addStudent()
+GET     /api/student/byid/:id               controllers.StudentController.getStudentById(id:Long)
+PUT     /api/student                        controllers.StudentController.updateStudent()
+DELETE  /api/student/:name                  controllers.StudentController.deleteStudentByName(name:String)
+GET     /api/student/byname/:name           controllers.StudentController.getStudentByName(name:String)
+GET     /api/student/all                    controllers.StudentController.getAllStudents()
