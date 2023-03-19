@@ -76,12 +76,12 @@ class TeamDao @Inject() (dbConfigProvider: DatabaseConfigProvider)(implicit ec: 
     }
   }
 
-  def find2(id: Long) = {
+  def find2(id: Long): Future[Team] = {
     val pp = db.run(filterQuery(id).result.head)
     pp
   }
 
-  def find(id: Long) = {
+  def find(id: Long): Future[Team] = {
     val pp = db.run(team.filter(_.id === id).result.head)
     pp
 

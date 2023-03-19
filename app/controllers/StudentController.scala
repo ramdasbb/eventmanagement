@@ -1,7 +1,7 @@
 package controllers
 
 import dao.StudentDao
-import models.{Student, StudentUpdate}
+import models.{ErrorMessage, Student, StudentUpdate, SuccessMessage}
 import play.api.Logger
 import play.api.libs.json.OFormat.oFormatFromReadsAndOWrites
 import play.api.libs.json.{JsError, JsSuccess, JsValue, Json, OFormat}
@@ -16,27 +16,17 @@ import scala.concurrent.Future
 class StudentController @Inject()(studentDao: StudentDao, studentService: StudentService, val controllerComponents: ControllerComponents ) extends BaseController {
   val logger: Logger = Logger.apply(this.getClass)
 
-  case class StudentDelete(message:String)
-
-  object StudentDelete {
-    implicit val format: OFormat[StudentDelete] = Json.format[StudentDelete]
-  }
-
   def getStudentByName(name: String): Action[AnyContent] = Action.async { _ =>
-    studentDao.findByName(name).map{ students =>
-      Ok( Json.toJson(students))
+    studentDao.findByName(name).map{ students => Ok( Json.toJson(students))
     }recover{
-      case _: Throwable =>
-        BadRequest(s"Not received student by name $name")
+      case _: Throwable => BadRequest(s"Not received student by name $name")
     }
   }
 
   def getStudent(id: Long): Action[AnyContent] = Action.async { _ =>
-    studentDao.findById(id).map { students =>
-      Ok(Json.toJson(students))
+    studentDao.findById(id).map { students => Ok(Json.toJson(students))
     } recover {
-      case _: Throwable =>
-        BadRequest(s"Not received student by id $id")
+      case _: Throwable => BadRequest(s"Not received student by id $id")
     }
   }
 
@@ -44,11 +34,11 @@ class StudentController @Inject()(studentDao: StudentDao, studentService: Studen
     request.body.asJson match {
       case Some(json) =>
         val student = json.asOpt[Student].getOrElse(throw new NoSuchElementException("Please provide valid data"))
-        studentDao.insert(student).map { p =>
-          Ok(Json.toJson(p))
+        studentDao.insert(student).map { p => Ok(Json.toJson(p))
+        } recover {
+          case t : Throwable => BadRequest(Json.toJson(ErrorMessage(message = t.getLocalizedMessage)))
         }
-      case None =>
-        Future.successful(BadRequest)
+      case None => Future.successful(BadRequest)
     }
   }
 
@@ -64,20 +54,16 @@ class StudentController @Inject()(studentDao: StudentDao, studentService: Studen
 
   def deleteStudent(name: String): Action[AnyContent] = Action.async { implicit request =>
     studentService.findAndDelete(name).map{
-      _ =>  Ok(Json.toJson(StudentDelete(s"Successfully deleted student $name")))
+      _ =>  Ok(Json.toJson(SuccessMessage(s"Successfully deleted student $name")))
     } recover {
-      case t: Throwable =>
-        Ok(Json.toJson(StudentDelete(t.getLocalizedMessage)))
+      case t: Throwable => Ok(Json.toJson(ErrorMessage(message = t.getLocalizedMessage)))
     }
   }
 
   def all: Action[AnyContent] = Action.async { implicit request =>
-    studentDao.list().map { students =>
-      Ok(Json.toJson(students))
+    studentDao.list().map { students => Ok(Json.toJson(students))
     } recover {
-      case t: Throwable =>
-        BadRequest(t.getLocalizedMessage)
+      case t: Throwable => BadRequest(t.getLocalizedMessage)
     }
   }
-
 }
