@@ -29,14 +29,20 @@ class StudentController @Inject()(studentDAO:StudentDAO,studentService:StudentSe
 
    */
 
+  case class DuplicateException(status:String,message:String)
+
+  implicit val format: OFormat[DuplicateException] = Json.format[DuplicateException]
+
   def addStudent():Action[AnyContent]=Action.async{ implicit request=>
     request.body.asJson match {
       case Some(json)=>
         val student=json.asOpt[Student].getOrElse(throw new NoSuchElementException("Please provide valid data"))
-        studentDAO.insertStudent(student)
-          .map{
-            s=>Ok(Json.toJson(s))
-          }
+          studentDAO.insertStudent(student)
+            .map {
+              s => Ok(Json.toJson(s))
+            }recover{
+          case e1:Exception=>BadRequest(Json.toJson(DuplicateException("error","duplicate record can not be allowed")))
+        }
       case None=>Future.successful(BadRequest)
         }
     }

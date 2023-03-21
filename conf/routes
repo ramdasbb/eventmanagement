@@ -35,3 +35,13 @@ PUT     /api/student                        controllers.StudentController.update
 DELETE  /api/student/:name                  controllers.StudentController.deleteStudentByName(name:String)
 GET     /api/student/byname/:name           controllers.StudentController.getStudentByName(name:String)
 GET     /api/student/all                    controllers.StudentController.getAllStudents()
+
+
+#Employee Ops
++nocsrf
+POST    /api/employee                        controllers.EmployeeController.addEmployee()
+GET     /api/employee/byid/:id               controllers.EmployeeController.getEmployeeById(id:Int)
+GET     /api/employee/byname/:name           controllers.EmployeeController.getEmployeeByName(name:String)
+GET     /api/employee/all                    controllers.EmployeeController.getAllEmployees()
+PUT     /api/employee                        controllers.EmployeeController.updateEmployee()
+DELETE  /api/employee/:id                    controllers.EmployeeController.deleteEmployeeByName(id:Int)
